@@ -55,6 +55,7 @@ async function run() {
                 }).data;
                 v.comments_data = c;
                 let result = template(v);
+                core.debug(result);
                 fs.writeFile(`${path}/${v.number}.md`, result);
             }
         } else {
