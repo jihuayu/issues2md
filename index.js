@@ -40,7 +40,7 @@ async function run() {
             const octokit = new github.GitHub(token);
             let date = new Date();
             date.setUTCHours(0, 0, 0, 0);
-            core.setOutput(`issues from date after ${date.toISOString()}`);
+            console.log(`issues from date after ${date.toISOString()}`);
             let data = (await octokit.issues.listForRepo({
                 owner: owner,
                 repo: repo,
@@ -59,11 +59,11 @@ async function run() {
                 })).data;
                 v.comments_data = c;
                 let result = template(v);
-                core.setOutput(result);
+                console.log(result);
                 fs.writeFileSync(`${path}/${v.number}.md`, result);
             }
         } else {
-            throw "error";
+            console.log(`fail`);
         }
     } catch (error) {
         core.setFailed(error.message);
